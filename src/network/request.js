@@ -9,6 +9,7 @@ export function request(config) {
     // 2.1 拦截请求
     instance1.interceptors.request.use(config => {
         // console.log(config);
+        config.headers.Authorization = sessionStorage.getItem('token');
         return config
     }, err => {
         console.log(err)
