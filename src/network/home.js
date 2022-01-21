@@ -36,3 +36,18 @@ export function getIdInfo(id) {
         method: 'get',
     })
 }
+
+export function editUser(userInfo) {
+    return request({
+        url: `/users/${userInfo.id}`,
+        method: 'put',
+        data: {email:userInfo.email, mobile:userInfo.mobile}
+    })
+}
+
+export function deleteUser(id) {
+    return request({
+        url: `/users/${id}`,
+        method: 'delete',
+    })
+}

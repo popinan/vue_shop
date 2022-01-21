@@ -24,7 +24,9 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="dialogVisible = true">添加用户</el-button>
+          <el-button type="primary" @click="dialogVisible = true"
+            >添加用户</el-button
+          >
         </el-col>
       </el-row>
       <!-- 用户列表区 -->
@@ -36,6 +38,7 @@
         <el-table-column prop="role_name" label="角色"> </el-table-column>
         <el-table-column label="状态">
           <template slot-scope="scope">
+            <!-- 作用域插槽，通过"scope.row"参数可以获取本行对象 -->
             <el-switch
               v-model="scope.row.mg_state"
               @change="stateChange(scope.row)"
@@ -54,6 +57,7 @@
               type="danger"
               icon="el-icon-delete"
               size="mini"
+              @click="deleteUserById(scope.row.id)"
             ></el-button>
             <el-tooltip
               class="item"
@@ -147,8 +151,15 @@
 </template>
 
 <script>
-import { getUserList, userStateChange,  addUser, getIdInfo } from "network/home.js";
-import {rules} from 'common/mixin.js';
+import {
+  getUserList,
+  userStateChange,
+  addUser,
+  getIdInfo,
+  editUser,
+  deleteUser,
+} from "network/home.js";
+import { rules } from "common/mixin.js";
 
 export default {
   data() {
@@ -168,7 +179,7 @@ export default {
         email: "",
         mobile: "",
       },
-      editUserForm: {}
+      editUserForm: {},
     };
   },
   mixins: [rules],
@@ -180,7 +191,7 @@ export default {
       getUserList(this.queryInfo).then((res) => {
         // console.log(res);
         if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
-        this.$message.success(res.meta.msg);
+        // this.$message.success(res.meta.msg);
         this.userList = res.data.users;
         this.total = res.data.total;
       });
@@ -214,28 +225,63 @@ export default {
         .catch((_) => {});
     },
     dialogClose(ref) {
-      ref.resetFields()
+      ref.resetFields();
     },
     addUserData() {
-      this.dialogVisible = false
-      this.$refs.ruleFormRef.validate(valid => {
+      this.dialogVisible = false;
+      this.$refs.ruleFormRef.validate((valid) => {
         if (valid) {
           addUser(this.addRuleForm).then((res) => {
-            console.log(res)
-            if (res.meta.status !== 201) return this.$message.error(res.meta.msg);
+            console.log(res);
+            if (res.meta.status !== 201)
+              return this.$message.error(res.meta.msg);
             this.$message.success(res.meta.msg);
             this.getUserData();
-          })}
-      })
+          });
+        }
+      });
     },
     showEditDialog(id) {
-      this.editDialogVisible = true
-      getIdInfo(id).then((res) =>{
-        if(res.meta.status !== 200) return this.$message.error(res.meta.msg);
-        this.editUserForm = res.data
-      })
+      this.editDialogVisible = true;
+      getIdInfo(id).then((res) => {
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
+        this.editUserForm = res.data;
+      });
     },
-    editUserData() {}
+    editUserData() {
+      this.$refs.editFormRef.validate((valid) => {
+        if (valid) {
+          editUser(this.editUserForm).then((res) => {
+            if (res.meta.status !== 200)
+              return this.$message.error(res.meta.msg);
+            this.editDialogVisible = false;
+            this.getUserData();
+            this.$message.success(res.meta.msg);
+          });
+        }
+      });
+    },
+    deleteUserById(id) {
+      this.$confirm("此操作将永久删除该用户, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          deleteUser(id).then((res) => {
+            if (res.meta.status !== 200)
+              return this.$message.error(res.meta.msg);
+            this.getUserData();
+            this.$message.success(res.meta.msg);
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
   },
 };
 </script>
