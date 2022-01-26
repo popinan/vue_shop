@@ -70,6 +70,7 @@
                 type="warning"
                 icon="el-icon-setting"
                 size="mini"
+                @click="setUserRight(scope.row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -147,6 +148,31 @@
         <el-button type="primary" @click="editUserData">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 配置用户权限对话框区 -->
+    <el-dialog title="分配角色" :visible.sync="setDialogVisible" width="50%" >
+      <div>
+        <p>当前用户: {{ userInfo.username }}</p>
+        <p>当前角色: {{ userInfo.role_name }}</p>
+        <p>
+          分配新角色:
+          <el-select v-model="selectedRole" placeholder="请选择角色">
+            <el-option
+              v-for="item in roleList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveRoleInfo"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -158,6 +184,8 @@ import {
   getIdInfo,
   editUser,
   deleteUser,
+  getRolesList,
+  saveRole,
 } from "network/home.js";
 import { rules } from "common/mixin.js";
 
@@ -180,6 +208,11 @@ export default {
         mobile: "",
       },
       editUserForm: {},
+      // 权限设置数据
+      setDialogVisible: false,
+      userInfo: {},
+      roleList: [],
+      selectedRole: "",
     };
   },
   mixins: [rules],
@@ -271,6 +304,10 @@ export default {
           deleteUser(id).then((res) => {
             if (res.meta.status !== 200)
               return this.$message.error(res.meta.msg);
+            if (this.userList.length === 1) {
+              this.queryInfo.pagenum =
+                this.queryInfo.pagenum === 1 ? 1 : this.queryInfo.pagenum - 1;
+            }
             this.getUserData();
             this.$message.success(res.meta.msg);
           });
@@ -282,6 +319,23 @@ export default {
           });
         });
     },
+    setUserRight(userInfo) {
+      this.userInfo = userInfo;
+      getRolesList().then((res) => {
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
+        this.roleList = res.data;
+        this.selectedRole = "";
+        this.setDialogVisible = true;
+      });
+    },
+    saveRoleInfo() {
+      if (!this.selectedRole) return this.$message.error('请选择用户角色');
+      saveRole(this.userInfo.id, this.selectedRole).then((res) => {
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
+        this.getUserData();
+        this.setDialogVisible = false;
+      })
+    }
   },
 };
 </script>
