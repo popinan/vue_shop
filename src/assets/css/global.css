@@ -4,3 +4,17 @@ html, body, #app{
     padding: 0;
     min-width: 1366px;
 }
+.el-breadcrumb {
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+.el-table {
+    margin-top: 15px;
+    font-size: 12px;
+}
+.el-pagination {
+    margin-top: 15px;
+}
+.el-cascader-menu {
+    height: 300px;
+}

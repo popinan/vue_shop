@@ -112,3 +112,37 @@ export function allocateRights(roleId, idStr) {
         data: {rids: idStr}
     })
 }
+// Categories组件使用
+export function getGoodsList(queryInfo) {
+    return request({
+        url: '/categories',
+        method: 'get',
+        params : queryInfo,
+    })
+}
+export function addCategory(cateInfo) {
+    return request({
+        url: `/categories`,
+        method: 'post',
+        data: cateInfo
+    })
+}
+export function getCateInfo(id) {
+    return request({
+        url: `/categories/${id}`,
+        method: 'get',
+    })
+}
+export function editCategory(cateInfo) {
+    return request({
+        url: `/categories/${cateInfo.cat_id}`,
+        method: 'put',
+        data: {cat_name:cateInfo.cat_name}
+    })
+}
+export function deletCategory(id) {
+    return request({
+        url: `/categories/${id}`,
+        method: 'delete',
+    })
+}

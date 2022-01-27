@@ -42,6 +42,9 @@ export const rules = {
                 roleDesc: [
                     { required: true, message: "请输入角色描述", trigger: "blur" },
                 ],
+                cat_name: [
+                    { required: true, message: "请输入分类名称", trigger: "blur" },
+                ],
             },
         }
     },
