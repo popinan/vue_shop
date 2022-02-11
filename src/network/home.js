@@ -11,7 +11,7 @@ export function getUserList(queryInfo) {
     return request({
         url: '/users',
         method: 'get',
-        params : queryInfo,
+        params: queryInfo,
     })
 }
 export function addUser(userInfo) {
@@ -37,7 +37,7 @@ export function editUser(userInfo) {
     return request({
         url: `/users/${userInfo.id}`,
         method: 'put',
-        data: {email:userInfo.email, mobile:userInfo.mobile}
+        data: { email: userInfo.email, mobile: userInfo.mobile }
     })
 }
 export function deleteUser(id) {
@@ -50,7 +50,7 @@ export function saveRole(userId, roleId) {
     return request({
         url: `/users/${userId}/role`,
         method: 'put',
-        data: {rid:roleId}
+        data: { rid: roleId }
     })
 }
 // Rights组件使用
@@ -77,7 +77,7 @@ export function editRole(roleInfo) {
     return request({
         url: `/roles/${roleInfo.roleId}`,
         method: 'put',
-        data: {roleName:roleInfo.roleName, roleDesc:roleInfo.roleDesc}
+        data: { roleName: roleInfo.roleName, roleDesc: roleInfo.roleDesc }
     })
 }
 export function deleteRole(id) {
@@ -109,7 +109,7 @@ export function allocateRights(roleId, idStr) {
     return request({
         url: `/roles/${roleId}/rights`,
         method: 'post',
-        data: {rids: idStr}
+        data: { rids: idStr }
     })
 }
 // Categories组件使用
@@ -117,7 +117,7 @@ export function getGoodsList(queryInfo) {
     return request({
         url: '/categories',
         method: 'get',
-        params : queryInfo,
+        params: queryInfo,
     })
 }
 export function addCategory(cateInfo) {
@@ -137,12 +137,47 @@ export function editCategory(cateInfo) {
     return request({
         url: `/categories/${cateInfo.cat_id}`,
         method: 'put',
-        data: {cat_name:cateInfo.cat_name}
+        data: { cat_name: cateInfo.cat_name }
     })
 }
 export function deletCategory(id) {
     return request({
         url: `/categories/${id}`,
+        method: 'delete',
+    })
+}
+// Params组件使用
+export function getParamsList(cateid, sel) {
+    return request({
+        url: `/categories/${cateid} /attributes`,
+        method: 'get',
+        params: { sel: sel },
+    })
+}
+export function addParams(cateid, paramInfo) {
+    return request({
+        url: `/categories/${cateid} /attributes`,
+        method: 'post',
+        data: paramInfo,
+    })
+}
+export function getParamInfo(cateid, attrinfo) {
+    return request({
+        url: `/categories/${cateid}/attributes/${attrinfo.id}`,
+        method: 'get',
+        params: { attr_sel: attrinfo.attr_sel },
+    })
+}
+export function editParam(cateid, attrinfo) {
+    return request({
+        url: `/categories/${cateid}/attributes/${attrinfo.id}`,
+        method: 'put',
+        data: { attr_name: attrinfo.attr_name, attr_sel: attrinfo.attr_sel, attr_vals: attrinfo.attr_vals }
+    })
+}
+export function deletParam(cateid, attrid) {
+    return request({
+        url: `/categories/${cateid}/attributes/${attrid}`,
         method: 'delete',
     })
 }

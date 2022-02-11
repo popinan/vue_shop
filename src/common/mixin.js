@@ -45,6 +45,9 @@ export const rules = {
                 cat_name: [
                     { required: true, message: "请输入分类名称", trigger: "blur" },
                 ],
+                attr_name: [
+                    { required: true, message: "请输入参数名称", trigger: "blur" },
+                ],
             },
         }
     },

@@ -10,6 +10,7 @@ const Users = () => import('@/views/home/childcomp/Users')
 const Rights = () => import('@/views/home/childcomp/Rights')
 const Roles = () => import('@/views/home/childcomp/Roles')
 const Categories = () => import('@/views/home/childcomp/Categories')
+const Params = () => import('@/views/home/childcomp/Params')
 
 const routes = [
   {
@@ -46,6 +47,10 @@ const routes = [
     {
       path: 'categories',
       component: Categories,
+    },
+    {
+      path: 'params',
+      component:Params,
     },
   ]
   },
