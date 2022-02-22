@@ -53,3 +53,29 @@ export const rules = {
     },
     methods: {}
 }
+
+export const goods_rules = {
+    // components: {},
+    data() {
+        return {
+            addRules: {
+                goods_name: [
+                    { required: true, message: "请输入商品名称", trigger: "blur" },
+                ],
+                goods_price: [
+                    { required: true, message: "请输入商品价格", trigger: "blur" },
+                ],
+                goods_weight: [
+                    { required: true, message: "请输入商品重量", trigger: "blur" },
+                ],
+                goods_number: [
+                    { required: true, message: "请输入商品数量", trigger: "blur" },
+                ],
+                goods_cat: [
+                    { required: true, message: "请选择商品分类", trigger: "blur" },
+                ],
+            },
+        }
+    },
+    methods: {}
+}

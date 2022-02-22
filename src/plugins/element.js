@@ -6,7 +6,9 @@ import {
     Breadcrumb, BreadcrumbItem, Card,
     Row, Col, Table, TableColumn, Select, Option,
     Switch, Tooltip, Pagination, Dialog, Tag, Tree,
-    Cascader, Alert, Tabs, TabPane,
+    Cascader, Alert, Tabs, TabPane, Steps, Step, 
+    Checkbox, CheckboxButton, CheckboxGroup,
+    Upload, 
 } from 'element-ui'
 
 Vue.use(Button)
@@ -40,6 +42,12 @@ Vue.use(Cascader)
 Vue.use(Alert)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(Checkbox)
+Vue.use(CheckboxButton)
+Vue.use(CheckboxGroup)
+Vue.use(Upload)
 
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;

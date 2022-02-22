@@ -11,6 +11,8 @@ const Rights = () => import('@/views/home/childcomp/Rights')
 const Roles = () => import('@/views/home/childcomp/Roles')
 const Categories = () => import('@/views/home/childcomp/Categories')
 const Params = () => import('@/views/home/childcomp/Params')
+const List = () => import('@/views/home/childcomp/List')
+const Add = () => import('@/views/home/childcomp/Add')
 
 const routes = [
   {
@@ -51,6 +53,14 @@ const routes = [
     {
       path: 'params',
       component:Params,
+    },
+    {
+      path: 'goods',
+      component:List,
+    },
+    {
+      path: 'add_goods',
+      component:Add,
     },
   ]
   },

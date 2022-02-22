@@ -181,3 +181,37 @@ export function deletParam(cateid, attrid) {
         method: 'delete',
     })
 }
+// List组件使用
+export function getGoods(queryInfo) {
+    return request({
+        url: '/goods',
+        method: 'get',
+        params: queryInfo,
+    })
+}
+export function editGoods(goodsInfo) {
+    return request({
+        url: `/goods/${goodsInfo.id}`,
+        method: 'put',
+        data: { email: goodsInfo.email, mobile: goodsInfo.mobile }
+    })
+}
+export function getGoodsInfo(id) {
+    return request({
+        url: `/goods/${id}`,
+        method: 'get',
+    })
+}
+export function deleteGoods(id) {
+    return request({
+        url: `/goods/${id}`,
+        method: 'delete',
+    })
+}
+export function addGoods(goodsInfo) {
+    return request({
+        url: `/goods`,
+        method: 'post',
+        data: goodsInfo,
+    })
+}
