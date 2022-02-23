@@ -8,7 +8,7 @@ import {
     Switch, Tooltip, Pagination, Dialog, Tag, Tree,
     Cascader, Alert, Tabs, TabPane, Steps, Step, 
     Checkbox, CheckboxButton, CheckboxGroup,
-    Upload, 
+    Upload, Timeline, TimelineItem,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -48,6 +48,8 @@ Vue.use(Checkbox)
 Vue.use(CheckboxButton)
 Vue.use(CheckboxGroup)
 Vue.use(Upload)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;

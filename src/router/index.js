@@ -13,6 +13,7 @@ const Categories = () => import('@/views/home/childcomp/Categories')
 const Params = () => import('@/views/home/childcomp/Params')
 const List = () => import('@/views/home/childcomp/List')
 const Add = () => import('@/views/home/childcomp/Add')
+const Order = () => import('@/views/home/childcomp/Order')
 
 const routes = [
   {
@@ -61,6 +62,10 @@ const routes = [
     {
       path: 'add_goods',
       component:Add,
+    },
+    {
+      path: 'orders',
+      component:Order,
     },
   ]
   },

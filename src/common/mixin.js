@@ -79,3 +79,19 @@ export const goods_rules = {
     },
     methods: {}
 }
+
+export const order_rules = {
+    // components: {},
+    data() {
+        return {
+            addRules: {
+                address1: [
+                    { required: true, message: "请选择省市区/县", trigger: "blur" },
+                ],
+                address2: [
+                    { required: true, message: "请输入详细地址", trigger: "blur" },
+                ],
+            },
+        }
+    },
+}

@@ -215,3 +215,17 @@ export function addGoods(goodsInfo) {
         data: goodsInfo,
     })
 }
+// Order组件使用
+export function getOrders(queryInfo) {
+    return request({
+        url: '/orders',
+        method: 'get',
+        params: queryInfo,
+    })
+}
+export function getProgress(id='1106975712662') {
+    return request({
+        url:  `/kuaidi/${id}`,
+        method: 'get',
+    })
+}
