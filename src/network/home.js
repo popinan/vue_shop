@@ -229,3 +229,10 @@ export function getProgress(id='1106975712662') {
         method: 'get',
     })
 }
+// Report组件使用
+export function getReport() {
+    return request({
+        url:  `/reports/type/1`,
+        method: 'get',
+    })
+}

@@ -14,6 +14,7 @@ const Params = () => import('@/views/home/childcomp/Params')
 const List = () => import('@/views/home/childcomp/List')
 const Add = () => import('@/views/home/childcomp/Add')
 const Order = () => import('@/views/home/childcomp/Order')
+const Report = () => import('@/views/home/childcomp/Report')
 
 const routes = [
   {
@@ -66,6 +67,10 @@ const routes = [
     {
       path: 'orders',
       component:Order,
+    },
+    {
+      path: 'reports',
+      component:Report,
     },
   ]
   },
